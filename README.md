@@ -74,7 +74,8 @@ python -m src.ingest data/spec.pdf
 # ask a question (embeds the doc once, caches to .cache/)
 python ask.py "What compressive strength is required for sidewalk concrete?"
 ```
-Changed the PDF or chunking? Delete `.cache/` so it re-embeds.
+Change the PDF, chunk settings, or embedding model and the cache rebuilds
+itself — it's fingerprinted, so there's no `.cache/` to remember to delete.
 
 ## Where to tune answer quality
 1. `src/chunk.py` — chunk size/overlap. Start here when answers are wrong.

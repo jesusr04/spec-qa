@@ -33,15 +33,15 @@ ingest → chunk → embed → retrieve → generate
 load_pdf  chunk_pages  embed_texts  top_k  answer
 ```
 
-- **ingest** (`fitz`/pymupdf) → `Page(number, text)`, dropping empty pages.
-- **chunk** → `Chunk(text, page, index)`, fixed word-windows with overlap.
-- **embed** → OpenAI `text-embedding-3-small` → `np.ndarray`.
+- **ingest** (`fitz`/pymupdf) → `Page(number, text, source)`, dropping empty pages. `source` is the real citation ("Item 422 — Concrete Superstructures, p. 543"), built from the spec item/title and the *printed* page number, not the PDF index.
+- **chunk** → `Chunk(text, page, index, source)`, fixed word-windows with overlap.
+- **embed** → OpenAI `text-embedding-3-small` (`embed.MODEL`) → `np.ndarray`.
 - **retrieve** → in-memory cosine similarity, top-k.
-- **generate** → Anthropic `claude-sonnet-4-6` with a system prompt that forces page citations and refuses with the exact string `"That isn't covered in this document."` when the answer isn't in the excerpts.
+- **generate** → Anthropic `claude-sonnet-4-6`. The system prompt forces source citations, opens with the spec's DESCRIPTION scope, surfaces "unless otherwise…" qualifiers, treats excerpts as untrusted (anti prompt-injection), and refuses with the exact string `"That isn't covered in this document."` when the answer isn't in the excerpts.
 
-**The page number is the load-bearing thread.** It originates in `ingest` and is carried through `Page` → `Chunk` → the `[page N]` context block in `generate` so the final answer can cite it. Preserve it across any change.
+**The `source` citation is the load-bearing thread.** It originates in `ingest` and is carried through `Page` → `Chunk` → the `<excerpt source="...">` block in `generate` so the final answer cites the spec item + printed page. Preserve it across any change.
 
-**Caching:** `build_index` in `pipeline.py` caches embeddings to `.cache/` (`vectors.npy` + `chunks.json`). It is keyed only by existence, not by content — **after changing the PDF, chunk size, or embedding model you must delete `.cache/`** or you'll query stale vectors.
+**Caching:** `build_index` in `pipeline.py` caches embeddings to `.cache/` (`vectors.npy`, `chunks.json`, `fingerprint.txt`). The fingerprint is a sha256 of the PDF bytes + chunk settings (`WORDS_PER_CHUNK`, `OVERLAP` in `pipeline.py`) + `embed.MODEL`, so changing any of them rebuilds the cache automatically — no manual deletion needed.
 
 ## Where answer quality lives (in order)
 
