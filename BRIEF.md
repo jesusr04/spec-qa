@@ -27,7 +27,7 @@ These define "done." Write real ones you know the answers to.
 1. What class of concrete do I use for the bridge deck? 
 2. What material do I need for curing the bridge slab?
 3. What kind of fiber expansion can I use at the bridge approach slab?
-4. Which sealant is allowed at bridge girder?
+4. What sealant is allowed for expansion joints?
 5. What type of evaporation Retardants can I use for the bridge slab? 
 
 ## Definition of done

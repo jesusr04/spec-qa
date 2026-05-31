@@ -15,8 +15,9 @@ citation back to the exact page. A working RAG demo.
 ## The problem
 Every infrastructure project runs on specifications. On a TxDOT bridge, a single
 document like Item 422 (Concrete Superstructures) dictates the class of concrete
-for the deck, the curing material for the slab, the sealant at the girders, the
-expansion material at the approach slab, and the tolerances for all of it.
+for the deck, the curing material for the slab, the sealant for the expansion
+joints, the expansion material at the approach slab, and the tolerances for all
+of it.
 
 The answer to almost any field question is in those documents. The problem is
 finding it. Today that means scrolling a dense, cross-referenced PDF, or
@@ -35,7 +36,7 @@ Real questions from the demo:
 - What class of concrete do I use for the bridge deck?
 - What material do I need for curing the bridge slab?
 - What expansion material is allowed at the approach slab?
-- Which sealant is allowed at the bridge girder?
+- What sealant is allowed for expansion joints?
 - What evaporation retardant can I use for the bridge slab?
 
 ## Who faces this
@@ -76,9 +77,9 @@ Construction specs hold the answer to almost every field question, and almost no
 one can find it fast.
 
 On a TxDOT bridge, one document sets the class of concrete for the deck, the
-curing material for the slab, the sealant at the girders, the expansion material
-at the approach slab. The answers are all in there. Getting one wrong means a
-rejected pour or a rework.
+curing material for the slab, the sealant for the expansion joints, the
+expansion material at the approach slab. The answers are all in there. Getting
+one wrong means a rejected pour or a rework.
 
 So I built a tool you can ask in plain English. "What class of concrete do I use
 for the bridge deck?" It answers and cites the exact page. Ask it something the
