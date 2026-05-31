@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-A deliberately minimal RAG CLI: answer questions about a **single** construction-spec PDF, citing the page each fact came from. It is a demo / interview proof-of-work, not a product. `BRIEF.md` is the scope contract — read it before adding anything. If a change can't justify itself against the BRIEF's "Scope guardrails" (no auth, no web UI, no vector DB, one document), it doesn't belong here.
+A deliberately minimal RAG CLI: answer questions about a **single** construction-spec PDF, citing the page each fact came from. It is a demo, not a product. Hold the line on scope — **no auth, no web UI, no vector DB, one document, one happy path** (ask → cited answer). If a change can't justify itself against those guardrails, it doesn't belong here. (A local-only `BRIEF.md`, kept out of the repo, holds the fuller planning notes.)
 
 ## Commands
 
